@@ -16,9 +16,11 @@ name_list = [
     ['Hand.L', 'Hand.L.IK'],
     ['Hand.R', 'Hand.R.IK']
 ]
-objList = [obj for obj in bpy.context.selected_objects]
+objList = [obj for obj in bpy.context.selected_objects if obj.type == 'MESH']
+print(objList)
 bpy.ops.object.select_all(action= 'DESELECT')
 for obj in objList:
+    bpy.context.view_layer.objects.active = obj
     v_groups = bpy.context.active_object.vertex_groups
     for n in name_list:
         if n[0] in v_groups:
